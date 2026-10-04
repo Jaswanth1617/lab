@@ -25,7 +25,17 @@ export default function MobileNavDrawer({ isOpen, onClose, onOpenBooking }) {
   };
 
   return (
-    <div className={`mobile-nav-drawer ${isOpen ? 'open' : ''}`} id="mobileNavDrawer" aria-hidden={!isOpen}>
+    <>
+      <div
+        className={`mobile-nav-backdrop ${isOpen ? 'active' : ''}`}
+        onClick={onClose}
+        aria-hidden="true"
+      />
+      <div
+        className={`mobile-nav-drawer ${isOpen ? 'open' : ''}`}
+        id="mobileNavDrawer"
+        aria-hidden={!isOpen}
+      >
       <div className="mobile-nav-header">
         <div className="brand-text">
           <span className="brand-name" style={{ fontSize: '1.05rem' }}>{t('mobile_lab_name')}</span>
@@ -133,5 +143,6 @@ export default function MobileNavDrawer({ isOpen, onClose, onOpenBooking }) {
         </a>
       </div>
     </div>
-  );
+  </>
+);
 }

@@ -56,16 +56,7 @@ export default function TestDetailsModal({ testId, isOpen, onClose, onBookThis }
         </div>
 
         <div className="modal-body" id="testDetailsContent">
-          <div
-            style={{
-              width: '100%',
-              height: '210px',
-              borderRadius: 'var(--radius-md)',
-              overflow: 'hidden',
-              marginBottom: '20px',
-              border: '1px solid var(--border-color)'
-            }}
-          >
+          <div className="test-modal-media">
             <img
               src={test.image}
               alt={test.title}
@@ -79,7 +70,7 @@ export default function TestDetailsModal({ testId, isOpen, onClose, onBookThis }
             </span>
           </div>
 
-          <h3 style={{ fontSize: '1.5rem', color: 'var(--dark-blue)', marginBottom: '14px' }}>
+          <h3 style={{ fontSize: 'clamp(1.2rem, 3.5vw, 1.5rem)', color: 'var(--dark-blue)', marginBottom: '14px' }}>
             {test.title}
           </h3>
 
@@ -112,18 +103,7 @@ export default function TestDetailsModal({ testId, isOpen, onClose, onBookThis }
             </div>
           )}
 
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: '1fr 1fr',
-              gap: '14px',
-              background: 'var(--bg-page)',
-              padding: '18px',
-              borderRadius: 'var(--radius-md)',
-              border: '1px solid var(--border-color)',
-              marginBottom: '24px'
-            }}
-          >
+          <div className="test-modal-info-grid">
             <div>
               <strong style={{ display: 'block', fontSize: '0.82rem', textTransform: 'uppercase', color: 'var(--primary)', marginBottom: '4px' }}>
                 {t('modal_label_prep')}
@@ -158,7 +138,7 @@ export default function TestDetailsModal({ testId, isOpen, onClose, onBookThis }
             </div>
           </div>
 
-          <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '12px' }}>
+          <div className="test-modal-actions">
             <button
               type="button"
               className="btn btn-secondary modal-close-btn"

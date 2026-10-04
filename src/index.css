@@ -73,7 +73,17 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
+  overflow-x: clip;
+  width: 100%;
+}
+
+.site-wrapper {
+  overflow-x: clip;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Typography styles */
@@ -111,20 +121,20 @@ button, input, select, textarea {
   max-width: 1240px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 24px;
-  padding-right: 24px;
+  padding-left: max(clamp(14px, 4vw, 24px), env(safe-area-inset-left, 0px));
+  padding-right: max(clamp(14px, 4vw, 24px), env(safe-area-inset-right, 0px));
 }
 
 .section {
-  padding-top: 90px;
-  padding-bottom: 90px;
+  padding-top: clamp(48px, 6vw, 90px);
+  padding-bottom: clamp(48px, 6vw, 90px);
   position: relative;
 }
 
 .section-header {
   text-align: center;
   max-width: 680px;
-  margin: 0 auto 52px;
+  margin: 0 auto clamp(32px, 5vw, 52px);
 }
 
 .section-label {
@@ -141,14 +151,14 @@ button, input, select, textarea {
 }
 
 .section-title {
-  font-size: 2.35rem;
+  font-size: clamp(1.75rem, 4vw + 0.5rem, 2.35rem);
   color: var(--dark-blue);
   letter-spacing: -0.5px;
   margin-bottom: 14px;
 }
 
 .section-subtitle {
-  font-size: 1.05rem;
+  font-size: clamp(0.92rem, 1.5vw, 1.05rem);
   color: var(--text-muted);
   line-height: 1.65;
 }
@@ -314,21 +324,25 @@ button, input, select, textarea {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 84px;
-  gap: 20px;
+  min-height: 72px;
+  height: clamp(72px, 8.5vw, 84px);
+  gap: clamp(10px, 2vw, 20px);
 }
 
 /* Brand Logo */
 .brand-logo {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: clamp(8px, 1.5vw, 12px);
   text-decoration: none;
+  min-width: 0;
+  margin-right: clamp(16px, 2.5vw, 36px);
+  flex-shrink: 0;
 }
 
 .brand-icon-wrapper {
-  width: 48px;
-  height: 48px;
+  width: clamp(40px, 4.5vw, 48px);
+  height: clamp(40px, 4.5vw, 48px);
   background: linear-gradient(135deg, var(--primary) 0%, var(--cyan) 100%);
   border-radius: var(--radius-md);
   display: flex;
@@ -340,30 +354,33 @@ button, input, select, textarea {
 }
 
 .brand-icon-wrapper svg {
-  width: 26px;
-  height: 26px;
+  width: clamp(22px, 2.5vw, 26px);
+  height: clamp(22px, 2.5vw, 26px);
 }
 
 .brand-text {
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
 .brand-name {
   font-family: var(--font-heading);
-  font-size: 1.18rem;
+  font-size: clamp(0.95rem, 2.2vw, 1.18rem);
   font-weight: 800;
   color: var(--dark-blue);
   letter-spacing: -0.3px;
   line-height: 1.2;
+  white-space: nowrap;
 }
 
 .brand-tagline {
-  font-size: 0.74rem;
+  font-size: clamp(0.68rem, 1.2vw, 0.74rem);
   color: var(--primary);
   font-weight: 600;
   letter-spacing: 0.5px;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 /* Nav Menu */
@@ -371,7 +388,7 @@ button, input, select, textarea {
   display: flex;
   align-items: center;
   list-style: none;
-  gap: 32px;
+  gap: clamp(14px, 1.8vw, 32px);
 }
 
 .nav-link {
@@ -633,11 +650,11 @@ body.lang-tamil h5 {
 }
 
 .hero-title {
-  font-size: 3.4rem;
+  font-size: clamp(2.1rem, 5vw + 0.5rem, 3.4rem);
   color: var(--dark-blue);
   line-height: 1.15;
   margin-bottom: 20px;
-  letter-spacing: -1px;
+  letter-spacing: -0.5px;
 }
 
 .hero-title .title-accent {
@@ -659,7 +676,7 @@ body.lang-tamil h5 {
 }
 
 .hero-desc {
-  font-size: 1.12rem;
+  font-size: clamp(0.96rem, 1.8vw, 1.12rem);
   color: var(--text-muted);
   line-height: 1.7;
   margin-bottom: 34px;
@@ -716,6 +733,7 @@ body.lang-tamil h5 {
 /* Hero Media & Floating Cards */
 .hero-media-wrapper {
   position: relative;
+  width: 100%;
 }
 
 .hero-image-frame {
@@ -723,13 +741,16 @@ body.lang-tamil h5 {
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-lg);
-  border: 6px solid var(--white);
+  border: clamp(3px, 1vw, 6px) solid var(--white);
   background: var(--white);
+  aspect-ratio: 4 / 3;
+  width: 100%;
+  max-height: 480px;
 }
 
 .hero-image-frame img {
   width: 100%;
-  height: 480px;
+  height: 100%;
   object-fit: cover;
   display: block;
   transition: transform var(--transition-slow);
@@ -921,12 +942,15 @@ body.lang-tamil h5 {
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-lg);
-  border: 6px solid var(--white);
+  border: clamp(3px, 1vw, 6px) solid var(--white);
+  aspect-ratio: 4 / 3;
+  width: 100%;
+  max-height: 480px;
 }
 
 .about-image-card img {
   width: 100%;
-  height: 480px;
+  height: 100%;
   object-fit: cover;
   object-position: 22% center;
   display: block;
@@ -1092,7 +1116,8 @@ body.lang-tamil h5 {
 .equipment-card-media {
   position: relative;
   width: 100%;
-  height: 175px;
+  aspect-ratio: 16 / 9;
+  height: auto;
   overflow: hidden;
   background: #f1f5f9;
 }
@@ -1257,8 +1282,8 @@ body.lang-tamil h5 {
 /* Test Cards Grid */
 .tests-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+  gap: clamp(16px, 2.5vw, 24px);
   margin-bottom: 45px;
 }
 
@@ -1285,7 +1310,8 @@ body.lang-tamil h5 {
 .test-card-media {
   position: relative;
   width: 100%;
-  height: 200px;
+  aspect-ratio: 16 / 9;
+  height: auto;
   overflow: hidden;
   background-color: var(--primary-light);
 }
@@ -2188,8 +2214,10 @@ textarea.form-control {
   border-radius: var(--radius-lg);
   width: 100%;
   max-width: 620px;
-  max-height: 90vh;
+  max-height: 92vh;
+  max-height: 92dvh;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   box-shadow: 0 25px 50px -12px rgba(11, 43, 82, 0.35);
   position: relative;
   transform: scale(0.92);
@@ -2201,7 +2229,7 @@ textarea.form-control {
 }
 
 .modal-header {
-  padding: 24px 28px;
+  padding: clamp(16px, 3vw, 24px) clamp(18px, 3.5vw, 28px);
   border-bottom: 1px solid var(--border-color);
   display: flex;
   align-items: center;
@@ -2213,7 +2241,7 @@ textarea.form-control {
 }
 
 .modal-title {
-  font-size: 1.35rem;
+  font-size: clamp(1.15rem, 2.5vw, 1.35rem);
   color: var(--dark-blue);
 }
 
@@ -2242,7 +2270,41 @@ textarea.form-control {
 }
 
 .modal-body {
-  padding: 28px;
+  padding: clamp(18px, 3.5vw, 28px);
+}
+
+/* Modal Specific Responsive Classes */
+.test-modal-media {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  max-height: 220px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin-bottom: 18px;
+  border: 1px solid var(--border-color);
+}
+
+.test-modal-info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  background: var(--bg-page);
+  padding: 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  margin-bottom: 22px;
+}
+
+.test-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.booking-pref-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
 }
 
 /* Toast Notification */
@@ -2360,20 +2422,41 @@ textarea.form-control {
   background: var(--primary-light);
 }
 
-/* Mobile Nav Drawer */
+/* Mobile Nav Backdrop & Drawer */
+.mobile-nav-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(11, 43, 82, 0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 2190;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition-normal), visibility var(--transition-normal);
+}
+
+.mobile-nav-backdrop.active {
+  opacity: 1;
+  visibility: visible;
+}
+
 .mobile-nav-drawer {
   position: fixed;
   top: 0;
   right: -100%;
-  width: 310px;
+  width: min(320px, 86vw);
   height: 100%;
+  max-height: 100vh;
+  max-height: 100dvh;
   background: var(--white);
   z-index: 2200;
-  box-shadow: -5px 0 30px rgba(11, 43, 82, 0.15);
+  box-shadow: -5px 0 30px rgba(11, 43, 82, 0.2);
   transition: right var(--transition-normal);
   display: flex;
   flex-direction: column;
-  padding: 30px 24px;
+  padding: 24px 20px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .mobile-nav-drawer.open {
@@ -2384,19 +2467,19 @@ textarea.form-control {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 30px;
+  margin-bottom: 24px;
 }
 
 .mobile-nav-links {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 18px;
-  margin-bottom: 30px;
+  gap: 16px;
+  margin-bottom: 24px;
 }
 
 .mobile-nav-link {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 600;
   color: var(--dark-blue);
   display: block;
@@ -2407,13 +2490,15 @@ textarea.form-control {
 }
 
 /* ==========================================================================
-   RESPONSIVE MEDIA QUERIES
+   RESPONSIVE MEDIA QUERIES (FULL DEVICE & RATIO FLEXIBILITY)
    ========================================================================== */
+
+/* Laptops / Desktops / Smaller Viewports (1100px) */
 @media (max-width: 1100px) {
-  .hero-title {
-    font-size: 2.8rem;
-  }
   .packages-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .equipment-cards-grid {
     grid-template-columns: repeat(2, 1fr);
   }
   .footer-top-grid {
@@ -2421,6 +2506,7 @@ textarea.form-control {
   }
 }
 
+/* Tablets Landscape & Portrait (992px) */
 @media (max-width: 992px) {
   .nav-menu {
     display: none;
@@ -2430,19 +2516,28 @@ textarea.form-control {
   }
   .hero-grid {
     grid-template-columns: 1fr;
-    gap: 40px;
+    gap: 36px;
   }
   .hero-content {
     order: 1;
   }
   .hero-media-wrapper {
     order: 2;
-    max-width: 600px;
+    max-width: 580px;
     margin: 0 auto;
   }
   .about-grid {
     grid-template-columns: 1fr;
-    gap: 40px;
+    gap: 36px;
+  }
+  .about-content-col {
+    order: 1;
+  }
+  .about-media-col {
+    order: 2;
+    max-width: 580px;
+    margin: 0 auto;
+    width: 100%;
   }
   .trust-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -2455,36 +2550,32 @@ textarea.form-control {
   }
   .process-steps-container {
     grid-template-columns: repeat(2, 1fr);
-    gap: 36px;
+    gap: 32px;
   }
   .process-steps-container::before {
     display: none;
   }
   .contact-layout-grid {
     grid-template-columns: 1fr;
+    gap: 32px;
   }
   .cta-banner-inner {
     flex-direction: column;
     text-align: center;
+    gap: 24px;
   }
   .cta-buttons {
     justify-content: center;
   }
 }
 
+/* Medium Tablets & Large Phones (768px) */
 @media (max-width: 768px) {
-  .section {
-    padding-top: 60px;
-    padding-bottom: 60px;
-  }
-  .hero-title {
-    font-size: 2.25rem;
-  }
   .top-notice-bar {
     display: none;
   }
   .tests-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
   }
   .packages-grid {
     grid-template-columns: 1fr;
@@ -2497,7 +2588,7 @@ textarea.form-control {
   }
   .footer-top-grid {
     grid-template-columns: 1fr;
-    gap: 32px;
+    gap: 28px;
   }
   .form-grid {
     grid-template-columns: 1fr;
@@ -2506,19 +2597,133 @@ textarea.form-control {
     grid-column: span 1;
   }
   .floating-card-1 {
-    left: 10px;
-    top: 10px;
+    left: 12px;
+    top: 12px;
   }
   .floating-card-2 {
-    left: 10px;
-    bottom: 10px;
+    left: 12px;
+    bottom: 12px;
   }
   .floating-card-3 {
-    right: 10px;
-    bottom: 20px;
+    right: 12px;
+    bottom: 16px;
   }
 }
 
+/* Mobile Phones (640px) */
+@media (max-width: 640px) {
+  .brand-logo {
+    margin-right: 0;
+  }
+  .brand-tagline {
+    display: none;
+  }
+  /* Hide Top Bar Book Test button to preserve clean header on phones */
+  .header-actions .open-book-modal-btn {
+    display: none;
+  }
+  /* Adapt Hero Floating Cards to a clean stacked badge container below the image */
+  .hero-media-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .floating-card {
+    position: static;
+    width: 100%;
+    transform: none !important;
+    animation: none;
+    box-shadow: var(--shadow-sm);
+    padding: 10px 14px;
+  }
+  .floating-info h4 {
+    font-size: 0.88rem;
+  }
+  .floating-info p {
+    font-size: 0.74rem;
+  }
+  .about-floating-experience {
+    bottom: 12px;
+    right: 12px;
+    padding: 10px 16px;
+  }
+  .about-floating-experience .exp-number {
+    font-size: 1.65rem;
+  }
+  .about-floating-experience .exp-text {
+    font-size: 0.76rem;
+  }
+  .equipment-cards-grid {
+    grid-template-columns: 1fr;
+  }
+  .equipment-showcase-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .lab-equipment-showcase {
+    padding: 20px 16px;
+  }
+  .filter-categories {
+    justify-content: center;
+    gap: 8px;
+  }
+  .category-tab {
+    padding: 7px 14px;
+    font-size: 0.82rem;
+  }
+  .test-modal-info-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 12px;
+  }
+  .test-modal-actions {
+    flex-direction: column-reverse;
+    gap: 10px;
+  }
+  .test-modal-actions .btn {
+    width: 100%;
+  }
+  .booking-pref-grid {
+    grid-template-columns: 1fr;
+  }
+  .modal-backdrop {
+    padding: 10px;
+  }
+  .modal-container {
+    max-height: 94vh;
+    max-height: 94dvh;
+    border-radius: var(--radius-md);
+  }
+  .modal-header {
+    padding: 14px 18px;
+  }
+  .modal-body {
+    padding: 16px 18px;
+  }
+  .search-overlay {
+    padding: 50px 14px 14px;
+  }
+  .floating-whatsapp-btn {
+    bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+    right: 18px;
+    width: 50px;
+    height: 50px;
+    padding: 0;
+    justify-content: center;
+    border-radius: 50%;
+  }
+  .floating-whatsapp-btn .whatsapp-label {
+    display: none;
+  }
+  .toast-container {
+    bottom: 78px;
+    left: 14px;
+    right: 14px;
+  }
+}
+
+/* Small Mobile Phones (480px) */
 @media (max-width: 480px) {
   .trust-grid {
     grid-template-columns: 1fr;
@@ -2528,12 +2733,89 @@ textarea.form-control {
   }
   .hero-btn-group {
     width: 100%;
+    flex-direction: column;
   }
   .hero-btn-group .btn {
     width: 100%;
   }
+  .hero-trust-indicator {
+    width: 100%;
+  }
+  .cta-buttons {
+    width: 100%;
+    flex-direction: column;
+  }
+  .cta-buttons .btn {
+    width: 100%;
+  }
   .brand-name {
-    font-size: 1rem;
+    font-size: clamp(0.92rem, 3.8vw, 1.05rem);
+  }
+  .brand-tagline {
+    font-size: 0.65rem;
+  }
+  .map-embed-container iframe {
+    height: 260px;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+  }
+}
+
+/* Ultra-compact / Foldable Phones (<= 340px) */
+@media (max-width: 340px) {
+  .container {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .brand-icon-wrapper {
+    width: 36px;
+    height: 36px;
+  }
+  .brand-name {
+    font-size: 0.88rem;
+  }
+  .btn-search-trigger {
+    width: 36px;
+    height: 36px;
+  }
+  .mobile-toggle svg {
+    width: 24px;
+    height: 24px;
+  }
+  .btn {
+    padding: 10px 16px;
+    font-size: 0.88rem;
+  }
+}
+
+/* Mobile Landscape & Short Viewports */
+@media (max-height: 580px) and (orientation: landscape) {
+  .modal-backdrop {
+    padding: 6px;
+    align-items: flex-start;
+  }
+  .modal-container {
+    max-height: 96vh;
+    max-height: 96dvh;
+  }
+  .modal-header {
+    padding: 10px 16px;
+  }
+  .modal-body {
+    padding: 12px 16px;
+  }
+  .test-modal-media {
+    max-height: 120px;
+  }
+  .hero-section {
+    padding-top: 36px;
+    padding-bottom: 40px;
+  }
+  .hero-image-frame {
+    max-height: 320px;
   }
 }
 
@@ -3045,6 +3327,29 @@ textarea.form-control {
   }
   .reviews-marquee-track.reverse {
     animation-duration: 36s;
+  }
+}
+
+@media (max-width: 480px) {
+  .review-card {
+    width: min(285px, 82vw);
+    min-width: min(285px, 82vw);
+    max-width: min(285px, 82vw);
+    padding: 16px 16px;
+  }
+  .marquee-edge-fade-left,
+  .marquee-edge-fade-right {
+    width: 20px;
+  }
+  .reviews-summary-bar {
+    flex-direction: column;
+    text-align: center;
+    gap: 14px;
+  }
+  .reviews-summary-left {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
   }
 }
 

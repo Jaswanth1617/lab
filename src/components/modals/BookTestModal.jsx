@@ -183,7 +183,7 @@ export default function BookTestModal({ isOpen, preselectedTest, onClose, onSucc
             {/* Visit Type Radio Selector */}
             <div className="form-group">
               <label className="form-label">{t('book_label_pref')}</label>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+              <div className="booking-pref-grid">
                 <label
                   style={{
                     border: `1px solid ${collectionType === 'lab' ? 'var(--primary)' : 'var(--border-color)'}`,
