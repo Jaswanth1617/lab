@@ -102,13 +102,14 @@ export default function AdminPortalModal({ isOpen, onClose, onShowToast }) {
         className="modal-container"
         style={{
           maxWidth: '880px',
-          maxHeight: '90vh',
+          width: 'min(100%, 880px)',
+          maxHeight: 'min(92dvh, calc(100vh - 20px))',
           display: 'flex',
           flexDirection: 'column'
         }}
       >
         {/* Header */}
-        <div className="modal-header" style={{ borderBottom: '1px solid #e2e8f0', padding: '18px 24px' }}>
+        <div className="modal-header" style={{ borderBottom: '1px solid #e2e8f0', padding: 'clamp(12px, 2.5vw, 18px) clamp(14px, 3vw, 24px)' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             <div
               style={{
@@ -119,7 +120,8 @@ export default function AdminPortalModal({ isOpen, onClose, onShowToast }) {
                 color: '#fff',
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center'
+                justifyContent: 'center',
+                flexShrink: 0
               }}
             >
               <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2">
@@ -127,10 +129,10 @@ export default function AdminPortalModal({ isOpen, onClose, onShowToast }) {
               </svg>
             </div>
             <div>
-              <h3 className="modal-title" style={{ margin: 0, fontSize: '1.25rem' }}>
+              <h3 className="modal-title" style={{ margin: 0, fontSize: 'clamp(1rem, 2.5vw, 1.25rem)' }}>
                 Clinic Database Records & Staff Portal
               </h3>
-              <p style={{ margin: 0, fontSize: '0.8rem', color: '#64748b' }}>
+              <p style={{ margin: 0, fontSize: '0.78rem', color: '#64748b' }}>
                 PostgreSQL Database: <code style={{ color: '#0d9488', fontWeight: 600 }}>clinic</code> on localhost:5432
               </p>
             </div>
@@ -153,9 +155,12 @@ export default function AdminPortalModal({ isOpen, onClose, onShowToast }) {
           style={{
             display: 'flex',
             gap: '8px',
-            padding: '12px 24px',
+            padding: '10px 16px',
             background: '#f8fafc',
-            borderBottom: '1px solid #e2e8f0'
+            borderBottom: '1px solid #e2e8f0',
+            overflowX: 'auto',
+            WebkitOverflowScrolling: 'touch',
+            flexWrap: 'wrap'
           }}
         >
           <button
