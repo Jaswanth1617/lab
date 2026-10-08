@@ -1,7 +1,8 @@
 import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
+import { CLINIC_INFO } from '../data/clinicInfo';
 
-export default function Footer({ onOpenTestDetails }) {
+export default function Footer({ onOpenTestDetails, onOpenAdminPortal }) {
   const { lang, t } = useLanguage();
 
   const handleTestLink = (e, testId) => {
@@ -156,7 +157,15 @@ export default function Footer({ onOpenTestDetails }) {
                   <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
                   <circle cx="12" cy="10" r="3" />
                 </svg>
-                <span>{t('footer_address_full')}</span>
+                <a
+                  href={CLINIC_INFO.maps.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: 'inherit', textDecoration: 'none' }}
+                  title="View on Google Maps"
+                >
+                  {t('footer_address_full')}
+                </a>
               </li>
               <li className="footer-contact-item">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -225,7 +234,7 @@ export default function Footer({ onOpenTestDetails }) {
               </a>
               {/* Location Pin */}
               <a
-                href="https://maps.google.com/?q=Ponneri+Tamil+Nadu"
+                href={CLINIC_INFO.maps.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="social-btn"
@@ -242,8 +251,30 @@ export default function Footer({ onOpenTestDetails }) {
         </div>
 
         {/* Footer Bottom Copyright */}
-        <div className="footer-bottom">
+        <div className="footer-bottom" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '14px' }}>
           <span>{t('footer_rights')}</span>
+          <button
+            type="button"
+            onClick={onOpenAdminPortal}
+            style={{
+              background: 'rgba(13, 148, 136, 0.2)',
+              border: '1px solid rgba(13, 148, 136, 0.5)',
+              color: '#5eead4',
+              padding: '6px 14px',
+              borderRadius: '20px',
+              cursor: 'pointer',
+              fontSize: '0.8rem',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              fontWeight: 500,
+              transition: 'all 0.2s ease'
+            }}
+            onMouseOver={(e) => { e.currentTarget.style.background = 'rgba(13, 148, 136, 0.35)'; }}
+            onMouseOut={(e) => { e.currentTarget.style.background = 'rgba(13, 148, 136, 0.2)'; }}
+          >
+            <span>🗄️ Database & Staff Portal</span>
+          </button>
           <span>{t('footer_motto')}</span>
         </div>
       </div>

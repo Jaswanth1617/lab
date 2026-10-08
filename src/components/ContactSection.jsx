@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { contactServiceOptions } from '../data/translations';
+import { CLINIC_INFO } from '../data/clinicInfo';
 import ReviewsSection from './ReviewsSection';
 
 export default function ContactSection({ reviews, onShowToast, onOpenWriteReview }) {
@@ -42,6 +43,17 @@ export default function ContactSection({ reviews, onShowToast, onOpenWriteReview
       window.open(inquiryWaUrl, '_blank');
     } catch (err) {
       console.warn('Popup blocked:', err);
+    }
+
+    // Save inquiry to PostgreSQL database
+    try {
+      fetch('/api/inquiries', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      }).catch((err) => console.warn('Database inquiry save warning:', err));
+    } catch (err) {
+      console.warn('Database inquiry save error:', err);
     }
 
     setFormData({
@@ -86,11 +98,29 @@ export default function ContactSection({ reviews, onShowToast, onOpenWriteReview
               <div className="contact-card-details">
                 <h4>{t('card_addr_title')}</h4>
                 <p>
-                  <strong>Sri Durgaa Clinical Laboratory</strong><br />
-                  Near Old Bus Stand / Railway Station Road,<br />
+                  <strong>{lang === 'ta' ? CLINIC_INFO.nameTamil : CLINIC_INFO.name}</strong><br />
+                  85MV+V74, Thayumanchetty St, NGO Nagar Extension,<br />
+                  (Near Old Bus Stand / Railway Station Road),<br />
                   Ponneri, Tiruvallur District,<br />
                   Tamil Nadu - 601204, India
                 </p>
+                <a
+                  href={CLINIC_INFO.maps.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="contact-card-map-link"
+                  title="Open location in Google Maps"
+                >
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <polygon points="3 11 22 2 13 21 11 13 3 11" />
+                  </svg>
+                  <span>{t('card_addr_link')}</span>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                    <polyline points="15 3 21 3 21 9" />
+                    <line x1="10" y1="14" x2="21" y2="3" />
+                  </svg>
+                </a>
               </div>
             </div>
 
@@ -232,15 +262,71 @@ export default function ContactSection({ reviews, onShowToast, onOpenWriteReview
           </div>
         </div>
 
-        {/* Embedded Google Maps Section */}
-        <div className="map-embed-container" aria-label="Google Map location of Sri Durgaa Clinical Laboratory in Ponneri">
-          <iframe
-            title="Sri Durgaa Clinical Laboratory Location Map Ponneri"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15535.53974416174!2d80.18342416327376!3d13.332304851221197!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a4d81ec79f5f0b5%3A0xc3f60877960fc5a3!2sPonneri%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
-            allowFullScreen=""
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          />
+        {/* Embedded Google Maps Section with Direct Navigation */}
+        <div className="map-embed-container" aria-label="Google Map location of Sri Durga Clinical Laboratory in Ponneri">
+          <div className="map-embed-header">
+            <div className="map-embed-info">
+              <span className="map-pin-badge" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+              </span>
+              <div>
+                <strong>{lang === 'ta' ? CLINIC_INFO.nameTamil : CLINIC_INFO.name}</strong>
+                <p>85MV+V74, Thayumanchetty St, NGO Nagar Ext, Ponneri - 601204</p>
+              </div>
+            </div>
+            <a
+              href={CLINIC_INFO.maps.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-primary map-directions-btn"
+              title="Get directions on Google Maps"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <polygon points="3 11 22 2 13 21 11 13 3 11" />
+              </svg>
+              <span>{t('map_btn_directions')}</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                <polyline points="15 3 21 3 21 9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
+              </svg>
+            </a>
+          </div>
+
+          {/* Interactive Map: Clicking anywhere navigates to Google Maps */}
+          <a
+            href={CLINIC_INFO.maps.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="map-embed-interactive-link"
+            aria-label="Click to open Sri Durga Clinical Laboratory in Google Maps"
+            title="Click map to open in Google Maps & get directions"
+          >
+            <iframe
+              title="Sri Durga Clinical Laboratory Location Map Ponneri"
+              src={CLINIC_INFO.maps.embedUrl}
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+            <div className="map-embed-overlay">
+              <span className="map-overlay-pill">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+                <span>{t('map_click_hint')}</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                  <polyline points="15 3 21 3 21 9" />
+                  <line x1="10" y1="14" x2="21" y2="3" />
+                </svg>
+              </span>
+            </div>
+          </a>
         </div>
       </div>
     </section>

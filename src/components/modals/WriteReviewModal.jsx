@@ -64,6 +64,24 @@ export default function WriteReviewModal({ isOpen, onClose, onSubmitReview }) {
       comment: { en: feedback, ta: feedback }
     };
 
+    // Save to PostgreSQL database
+    try {
+      fetch('/api/reviews', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name,
+          location: area || (isTa ? 'பொன்னேரி' : 'Ponneri'),
+          rating,
+          testName,
+          comment: feedback,
+          category: 'packages'
+        })
+      }).catch((err) => console.warn('Database review save warning:', err));
+    } catch (err) {
+      console.warn('Database review save error:', err);
+    }
+
     onSubmitReview(newReview);
     onClose();
   };

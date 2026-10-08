@@ -108,6 +108,17 @@ export default function BookTestModal({ isOpen, preselectedTest, onClose, onSucc
       secondaryWaUrl
     };
 
+    // Save to PostgreSQL database
+    try {
+      fetch('/api/bookings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(bookingData)
+      }).catch((err) => console.warn('Database booking save warning:', err));
+    } catch (err) {
+      console.warn('Database booking save error:', err);
+    }
+
     onSuccess(bookingData);
   };
 

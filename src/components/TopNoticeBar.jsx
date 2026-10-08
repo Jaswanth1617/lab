@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
+import { CLINIC_INFO } from '../data/clinicInfo';
 
 export default function TopNoticeBar() {
   const { lang, setLang, t } = useLanguage();
@@ -8,13 +9,20 @@ export default function TopNoticeBar() {
     <aside className="top-notice-bar" aria-label="Quick contact and timing notice">
       <div className="container top-bar-inner">
         <div className="top-bar-contact">
-          <span className="top-bar-item">
+          <a
+            href={CLINIC_INFO.maps.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="top-bar-item"
+            style={{ color: 'inherit', textDecoration: 'none' }}
+            title="View Sri Durga Clinical Laboratory on Google Maps"
+          >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
               <circle cx="12" cy="10" r="3" />
             </svg>
             <span>{t('topbar_address')}</span>
-          </span>
+          </a>
           <span className="top-bar-item">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <circle cx="12" cy="12" r="10" />

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { LanguageProvider } from './context/LanguageContext';
 import TopNoticeBar from './components/TopNoticeBar';
 import Header from './components/Header';
@@ -21,6 +21,7 @@ import BookTestModal from './components/modals/BookTestModal';
 import ConfirmationModal from './components/modals/ConfirmationModal';
 import SearchOverlay from './components/modals/SearchOverlay';
 import WriteReviewModal from './components/modals/WriteReviewModal';
+import AdminPortalModal from './components/modals/AdminPortalModal';
 import { reviewsData } from './data/reviewsData';
 
 function MainApp() {
@@ -31,6 +32,23 @@ function MainApp() {
   const [bookingRecord, setBookingRecord] = useState(null);
   const [toasts, setToasts] = useState([]);
   const [reviews, setReviews] = useState(reviewsData);
+
+  // Fetch reviews from PostgreSQL database on load
+  useEffect(() => {
+    fetch('/api/reviews')
+      .then((res) => {
+        if (!res.ok) throw new Error('API response not ok');
+        return res.json();
+      })
+      .then((data) => {
+        if (Array.isArray(data) && data.length > 0) {
+          setReviews(data);
+        }
+      })
+      .catch((err) => {
+        console.debug('Using local reviews fallback:', err.message);
+      });
+  }, []);
 
   const showToast = (message) => {
     const id = Date.now() + Math.random();
@@ -117,7 +135,10 @@ function MainApp() {
       </main>
 
       {/* Footer */}
-      <Footer onOpenTestDetails={handleOpenTestDetails} />
+      <Footer
+        onOpenTestDetails={handleOpenTestDetails}
+        onOpenAdminPortal={() => setActiveModal('adminPortal')}
+      />
 
       {/* Floating WhatsApp Action Button */}
       <FloatingWhatsApp />
@@ -153,6 +174,12 @@ function MainApp() {
         isOpen={activeModal === 'writeReview'}
         onClose={handleCloseModal}
         onSubmitReview={handleReviewSubmit}
+      />
+
+      <AdminPortalModal
+        isOpen={activeModal === 'adminPortal'}
+        onClose={handleCloseModal}
+        onShowToast={showToast}
       />
 
       {/* Toast Notifications */}

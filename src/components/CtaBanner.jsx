@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
+import { CLINIC_INFO } from '../data/clinicInfo';
 
 export default function CtaBanner() {
   const { t } = useLanguage();
@@ -17,7 +18,7 @@ export default function CtaBanner() {
               {t('cta_btn_contact')}
             </a>
             <a
-              href="https://maps.google.com/?q=Ponneri+Tamil+Nadu"
+              href={CLINIC_INFO.maps.url}
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-outline-white"
