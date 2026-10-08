@@ -38,7 +38,7 @@ export const translations = {
 
     // Hero Floating Cards
     floating_1_title: 'Accurate Reports',
-    floating_1_desc: '100% Quality Verified',
+    floating_1_desc: '99% Quality Verified',
     floating_2_title: 'Experienced Team',
     floating_2_desc: 'Certified Lab Technicians',
     floating_3_title: 'Quality Testing',
@@ -398,7 +398,7 @@ export const translations = {
 
     // Hero Floating Cards
     floating_1_title: 'துல்லியமான முடிவுகள்',
-    floating_1_desc: '100% தரக் கட்டுப்பாடு சரிபார்ப்பு',
+    floating_1_desc: '99% தரக் கட்டுப்பாடு சரிபார்ப்பு',
     floating_2_title: 'அனுபவமிக்க குழு',
     floating_2_desc: 'சான்றிதழ் பெற்ற ஆய்வக நிபுணர்கள்',
     floating_3_title: 'தரமான சோதனைகள்',

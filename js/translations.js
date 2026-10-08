@@ -42,7 +42,7 @@ const translations = {
 
     // Hero Floating Cards
     floating_1_title: 'Accurate Reports',
-    floating_1_desc: '100% Quality Verified',
+    floating_1_desc: '99% Quality Verified',
     floating_2_title: 'Experienced Team',
     floating_2_desc: 'Certified Lab Technicians',
     floating_3_title: 'Quality Testing',

@@ -456,6 +456,15 @@ button, input, select, textarea {
   cursor: pointer;
   transition: all var(--transition-fast);
   line-height: 1;
+  white-space: nowrap;
+}
+
+.lang-text-short {
+  display: none;
+}
+
+.lang-text-full {
+  display: inline;
 }
 
 .lang-btn:hover {
@@ -2749,6 +2758,19 @@ textarea.form-control {
   .top-notice-bar {
     display: none;
   }
+  .brand-logo {
+    margin-right: 8px;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  .brand-name {
+    font-size: clamp(0.85rem, 2.8vw, 1.05rem);
+  }
+  .header-actions {
+    flex-shrink: 0;
+    gap: 8px;
+    margin-left: auto;
+  }
   .tests-grid {
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
     gap: 18px;
@@ -2809,15 +2831,106 @@ textarea.form-control {
 
 /* Mobile Phones (640px) */
 @media (max-width: 640px) {
-  .brand-logo {
-    margin-right: 0;
+  .nav-container {
+    min-height: 60px;
+    height: 60px;
+    gap: 6px;
+    padding-left: max(10px, var(--safe-left));
+    padding-right: max(10px, var(--safe-right));
   }
+
+  .brand-logo {
+    margin-right: 4px;
+    gap: 8px;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .brand-icon-wrapper {
+    width: 34px;
+    height: 34px;
+    border-radius: var(--radius-sm);
+    flex-shrink: 0;
+  }
+
+  .brand-icon-wrapper svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .brand-text {
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .brand-name {
+    font-size: clamp(0.74rem, 3vw, 0.92rem);
+    white-space: normal;
+    line-height: 1.15;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
   .brand-tagline {
     display: none;
   }
-  /* Preserve clean header on phones */
+
+  /* Right Header Actions stay fully visible on mobile without clipping */
+  .header-actions {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-left: auto;
+  }
+
   .header-actions .open-book-modal-btn {
     display: none;
+  }
+
+  .lang-switch-wrap {
+    padding: 2px 4px;
+    gap: 2px;
+    flex-shrink: 0;
+  }
+
+  .lang-text-full {
+    display: none;
+  }
+
+  .lang-text-short {
+    display: inline;
+  }
+
+  .lang-btn {
+    padding: 4px 7px;
+    font-size: 0.76rem;
+    font-weight: 700;
+  }
+
+  .btn-search-trigger {
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+  }
+
+  .btn-search-trigger svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .mobile-toggle {
+    display: block;
+    padding: 4px;
+    flex-shrink: 0;
+  }
+
+  .mobile-toggle svg {
+    width: 24px;
+    height: 24px;
   }
   .equipment-cards-grid {
     grid-template-columns: 1fr;

@@ -96,7 +96,8 @@ export default function Header({ onOpenBooking, onOpenSearch, onToggleMobileMenu
               aria-label="Switch to English"
               title="Switch to English"
             >
-              English
+              <span className="lang-text-full">English</span>
+              <span className="lang-text-short">EN</span>
             </button>
             <span className="lang-divider">|</span>
             <button
@@ -106,7 +107,8 @@ export default function Header({ onOpenBooking, onOpenSearch, onToggleMobileMenu
               aria-label="தமிழுக்கு மாற்றவும்"
               title="தமிழுக்கு மாற்றவும்"
             >
-              தமிழ்
+              <span className="lang-text-full">தமிழ்</span>
+              <span className="lang-text-short">தமிழ்</span>
             </button>
           </div>
 
